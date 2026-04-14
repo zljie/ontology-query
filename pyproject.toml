@@ -1,0 +1,19 @@
+[project]
+name = "ontology-query"
+version = "0.1.0"
+description = "Deterministic ontology query engine for OSI semantic models (YAML) with Datalog-based reasoning."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "Apache-2.0" }
+authors = [{ name = "ontology-query contributors" }]
+dependencies = [
+  "PyYAML>=6.0",
+  "pyDatalog>=0.17.4",
+]
+
+[project.scripts]
+ontq = "ontology_query.cli:main"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+

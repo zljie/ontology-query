@@ -1,0 +1,15 @@
+README.md
+pyproject.toml
+src/ontology_query/__init__.py
+src/ontology_query/cli.py
+src/ontology_query/datalog_engine.py
+src/ontology_query/model_loader.py
+src/ontology_query/nlq.py
+src/ontology_query/ontology.py
+src/ontology_query.egg-info/PKG-INFO
+src/ontology_query.egg-info/SOURCES.txt
+src/ontology_query.egg-info/dependency_links.txt
+src/ontology_query.egg-info/entry_points.txt
+src/ontology_query.egg-info/requires.txt
+src/ontology_query.egg-info/top_level.txt
+tests/test_basic.py

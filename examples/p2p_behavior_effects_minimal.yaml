@@ -1,0 +1,72 @@
+# yaml-language-server: $schema=../../OSI/core-spec/osi-schema.json
+version: 0.1.2
+
+semantic_model:
+  - name: sap_p2p_minimal_behavior
+    description: "Minimal example: first-class behavior/actions/effects for SAP P2P"
+
+    datasets:
+      - name: suppliers
+        source: sap.p2p.suppliers
+        primary_key: [supplier_id]
+        description: "Supplier master data"
+        fields:
+          - name: supplier_id
+            expression:
+              dialects:
+                - dialect: ANSI_SQL
+                  expression: supplier_id
+            description: "Supplier ID"
+
+          - name: supplier_name
+            expression:
+              dialects:
+                - dialect: ANSI_SQL
+                  expression: supplier_name
+            description: "Supplier name"
+
+          - name: status
+            expression:
+              dialects:
+                - dialect: ANSI_SQL
+                  expression: status
+            description: "Supplier lifecycle / blocking status (e.g., Active, Blocked)"
+
+    behavior:
+      namespace: "SAP_P2P"
+      behavior_layer_version: "0.1"
+      actions:
+        - id: suppliers/block
+          title: Block supplier
+          kind: command
+          operation: block
+          entity_name: suppliers
+          effects:
+            - entity: field
+              mode: write
+              impact_type: state_transition
+              selectors:
+                dataset: suppliers
+                field_names: [status]
+              set_value: Blocked
+              confidence: guaranteed
+
+        - id: suppliers/unblock
+          title: Unblock supplier
+          kind: command
+          operation: unblock
+          entity_name: suppliers
+          effects:
+            - entity: field
+              mode: write
+              impact_type: state_transition
+              selectors:
+                dataset: suppliers
+                field_names: [status]
+              transition:
+                from: Blocked
+                to: Active
+              confidence: likely
+
+      rules: []
+
